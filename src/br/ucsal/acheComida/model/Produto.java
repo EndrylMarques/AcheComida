@@ -7,9 +7,13 @@ public class Produto {
 	private Categoria categoria;
 	private Double valor;
 
-	public Produto(Integer id, String descricao, Categoria categoria, Double valor) {
+	
+	
+	public Produto() {
 		super();
-		this.id = id;
+	}
+
+	public Produto(String descricao, Categoria categoria, Double valor) {
 		this.descricao = descricao;
 		this.categoria = categoria;
 		this.valor = valor;

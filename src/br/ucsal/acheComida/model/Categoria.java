@@ -9,9 +9,7 @@ public class Categoria {
 		
 	}
 
-	public Categoria(Integer id, String descricao) {
-		super();
-		this.id = id;
+	public Categoria(String descricao) {
 		this.descricao = descricao;
 	}
 

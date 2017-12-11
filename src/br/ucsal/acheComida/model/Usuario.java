@@ -1,6 +1,6 @@
 package br.ucsal.acheComida.model;
 
-public class Ususario {
+public class Usuario {
 
 	private Integer id;
 	private String nome;
@@ -9,9 +9,11 @@ public class Ususario {
 	private String telefone;
 	private Produto produto;
 
-	public Ususario(Integer id, String nome, String email, String senha, String telefone, Produto produto) {
-		super();
-		this.id = id;
+	public Usuario() {
+
+	}
+
+	public Usuario(String nome, String email, String senha, String telefone, Produto produto) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
