@@ -46,7 +46,7 @@ public class CategoriaDAO {
 			PreparedStatement ps = conexao.getConnection()
 					.prepareStatement("insert into categorias (descricao) values (?);");
 			ps.setString(1, categoria.getDescricao());
-			ps.execute();
+			ps.executeUpdate();
 			ps.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
