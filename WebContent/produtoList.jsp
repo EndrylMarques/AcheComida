@@ -11,29 +11,29 @@
     <link href="/acheComida/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="/acheComida//css/app.css" rel="stylesheet">
     
+
 </head>
 
 <body>
 <c:import url="topo.jsp"></c:import>
 <div class="container">
 <div class="page-header">
-<h1> Lista de Categorias </h1>
+<h1> Lista de Produtos </h1>
 </div>
 
 <table class="table" >
 <tr>
-
-<th> id </th>
 <th> Nome </th>
- 
+<th> Categoria </th>
+<th> Preço </th>
 </tr>
 
-<c:forEach var="e" items="${lista}">
+<c:forEach var="c" items="${lista}">
 <tr>
-
- <td> ${e.id} </td>
- <td> ${e.descricao} </td>
- 
+ <td> ${c.descricao} </td>
+ <td> ${c.categoria.descricao} </td>
+ <td> ${c.valor} </td>
+  
 <tr>
 </c:forEach>
 </table>

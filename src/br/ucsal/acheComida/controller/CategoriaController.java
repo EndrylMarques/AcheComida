@@ -26,11 +26,13 @@ public class CategoriaController extends HttpServlet {
 
 		String q = request.getParameter("q");
 		if (q != null && q.equals("new")) {
-			request.getRequestDispatcher("categoriaform.jsp").forward(request, response);
+			request.getRequestDispatcher("categoriaForm.jsp").forward(request, response);
 		} else {
 			CategoriaDAO dao = new CategoriaDAO();
+//			request.setAttribute("lista", dao.listar());
+//			request.getRequestDispatcher("index.jsp").forward(request, response);
 			request.setAttribute("lista", dao.listar());
-			request.getRequestDispatcher("categorialist.jsp").forward(request, response);
+			request.getRequestDispatcher("categoriaList.jsp").forward(request, response);
 		}
 	}
 
@@ -45,8 +47,9 @@ public class CategoriaController extends HttpServlet {
 		dao.inserir(categoria);
 
 		request.setAttribute("lista", dao.listar());
-		request.getRequestDispatcher("categorialist.jsp").forward(request, response);
-
+		request.getRequestDispatcher("categoriaList.jsp").forward(request, response);
+//		request.setAttribute("lista", dao.listar());
+//		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 }
 

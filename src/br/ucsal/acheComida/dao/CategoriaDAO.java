@@ -18,12 +18,9 @@ public class CategoriaDAO {
 	}
 
 	public List<Categoria> listar() {
-
 		Statement stmt;
 		List<Categoria> categorias = new ArrayList<>();
-
 		try {
-
 			stmt = conexao.getConnection().createStatement();
 			ResultSet rs = stmt.executeQuery("select id, descricao from categorias;");
 			while (rs.next()) {
@@ -40,7 +37,6 @@ public class CategoriaDAO {
 		return categorias;
 	}
 
-
 	public void inserir(Categoria categoria) {
 		try {
 			PreparedStatement ps = conexao.getConnection()
@@ -55,26 +51,25 @@ public class CategoriaDAO {
 	}
 
 	public Categoria getByID(int id) {
-		Categoria c = null;
+		Categoria cat = null;
 		try {
 			PreparedStatement ps = conexao.getConnection()
-					.prepareStatement("select descricao from categorias where id=?");
+					.prepareStatement("select id, descricao from categorias where id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()) {
-				c = new Categoria();
-				c.setId(rs.getInt("id"));
-				c.setDescricao(rs.getString("descricao"));
+			if (rs.next()) {
+				cat = new Categoria();
+				cat.setId(rs.getInt("id"));
+				cat.setDescricao(rs.getString("descricao"));
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return c;
+		return cat;
 	}
-	
+
 	public void close() {
 		conexao.closeConnection();
 	}
-	
+
 }

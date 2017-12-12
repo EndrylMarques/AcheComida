@@ -15,10 +15,19 @@
 	<c:import url="topo.jsp"></c:import>
 	<div class="container">
 		<div class="page-header">
-			<h1>Inserir Categoria</h1>
+			<h1>Inserir Produto</h1>
 		</div>
-		<form action="categorias" method="post">
-			Nome:<input type="text" name="descricao" /><br> <br>
+		<form action="produtos" method="get">
+			Nome:<input type="text" name="descricao" /><br>
+			Categoria:	
+		<select name="categorias" >
+			<option value="" selected>Selecione</option>
+			<c:forEach var="categorias" items="${lista}">
+				<option value="${categorias.id}">${categorias.descricao}</option>
+			</c:forEach>
+		</select> <br />
+			Preço: R$<input type="number" name="valor" /><br> <br>
+	
 			<input type="submit" value="Salvar" />
 		</form>
 	</div>
