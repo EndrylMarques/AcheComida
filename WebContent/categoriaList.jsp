@@ -23,16 +23,16 @@
 <table class="table" >
 <tr>
 
-<th> id </th>
 <th> Nome </th>
- 
+<th> Excluir Categoria </th>
 </tr>
 
 <c:forEach var="e" items="${lista}">
 <tr>
 
- <td> ${e.id} </td>
- <td> ${e.descricao} </td>
+ <td> <a href="#">${e.descricao} </a></td>
+ <td> <a href="/acheComida/categorias?q=excluir&id=${e.id}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a> </td>
+ 
  
 <tr>
 </c:forEach>

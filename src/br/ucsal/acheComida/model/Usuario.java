@@ -7,18 +7,16 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private String telefone;
-	private Produto produto;
 
 	public Usuario() {
 
 	}
 
-	public Usuario(String nome, String email, String senha, String telefone, Produto produto) {
+	public Usuario(String nome, String email, String senha, String telefone) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.telefone = telefone;
-		this.produto = produto;
 	}
 
 	public Integer getId() {
@@ -59,14 +57,6 @@ public class Usuario {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
 	}
 
 }

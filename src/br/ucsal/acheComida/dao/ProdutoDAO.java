@@ -90,4 +90,20 @@ public class ProdutoDAO {
 		return produto;
 	}
 
+	public void atualizar(Produto produto) {
+		// TODO Auto-generated method stub
+		try {
+			PreparedStatement ps = conexao.getConnection()
+					.prepareStatement("update produtos set descricao = ?, categoriaid =?, valor=? where id =?;");
+			ps.setString(1, produto.getDescricao());
+			ps.setInt(2, produto.getCategoria().getId());
+			ps.setDouble(3, produto.getValor());
+			ps.setInt(4, produto.getId());
+			ps.execute();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

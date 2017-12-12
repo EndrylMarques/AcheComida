@@ -14,7 +14,6 @@ import br.ucsal.acheComida.model.Categoria;
 @WebServlet("/categorias")
 public class CategoriaController extends HttpServlet {
 
-
 	/**
 	 * 
 	 */
@@ -27,29 +26,46 @@ public class CategoriaController extends HttpServlet {
 		String q = request.getParameter("q");
 		if (q != null && q.equals("new")) {
 			request.getRequestDispatcher("categoriaForm.jsp").forward(request, response);
-		} else {
-			CategoriaDAO dao = new CategoriaDAO();
-//			request.setAttribute("lista", dao.listar());
-//			request.getRequestDispatcher("index.jsp").forward(request, response);
-			request.setAttribute("lista", dao.listar());
-			request.getRequestDispatcher("categoriaList.jsp").forward(request, response);
+			return;
 		}
+
+		CategoriaDAO dao = new CategoriaDAO();
+
+		if (q != null && q.equals("editar")) {
+			String id = request.getParameter("id");
+			Categoria categoria = dao.getByID(Integer.parseInt(id));
+			request.setAttribute("categoria", categoria);
+			request.getRequestDispatcher("categoriaForm.jsp").forward(request, response);
+		}
+
+		if (q != null && q.equals("excluir")) {
+			String id = request.getParameter("id");
+			dao.excluir(Integer.parseInt(id));
+		}
+
+		request.setAttribute("lista", dao.listar());
+		request.getRequestDispatcher("categoriaList.jsp").forward(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String id = request.getParameter("id");
 		String descricao = request.getParameter("descricao");
-	
+
 		Categoria categoria = new Categoria(descricao);
 		CategoriaDAO dao = new CategoriaDAO();
+		if (id != null && !id.isEmpty()) {
+			categoria.setId(Integer.parseInt(id));
+			dao.atualizar(categoria);
+		} else {
+			dao.inserir(categoria);
+		}
+
 		dao.inserir(categoria);
 
 		request.setAttribute("lista", dao.listar());
 		request.getRequestDispatcher("categoriaList.jsp").forward(request, response);
-//		request.setAttribute("lista", dao.listar());
-//		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 }
-
