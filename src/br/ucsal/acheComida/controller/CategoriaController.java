@@ -43,8 +43,10 @@ public class CategoriaController extends HttpServlet {
 			dao.excluir(Integer.parseInt(id));
 		}
 
-		request.setAttribute("lista", dao.listar());
-		request.getRequestDispatcher("categoriaList.jsp").forward(request, response);
+//		request.setAttribute("lista", dao.listar());
+//		request.getRequestDispatcher("categoriaList.jsp").forward(request, response);
+		request.setAttribute("listaOrdem", dao.organizar());
+		request.getRequestDispatcher("categoriaOrdem.jsp").forward(request, response);
 	}
 
 	@Override
@@ -65,7 +67,10 @@ public class CategoriaController extends HttpServlet {
 
 		dao.inserir(categoria);
 
-		request.setAttribute("lista", dao.listar());
-		request.getRequestDispatcher("categoriaList.jsp").forward(request, response);
+//		request.setAttribute("lista", dao.listar());
+//		request.getRequestDispatcher("categoriaList.jsp").forward(request, response);
+		request.setAttribute("listaOrdem", dao.organizar());
+		request.getRequestDispatcher("categoriaOrdem.jsp").forward(request, response);
+	
 	}
 }

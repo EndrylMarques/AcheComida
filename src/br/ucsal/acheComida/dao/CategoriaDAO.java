@@ -101,4 +101,26 @@ public class CategoriaDAO {
 		}
 	}
 
+	public List<Categoria> organizar() {
+		Statement stmt;
+		List<Categoria> categorias = new ArrayList<>();
+		try {
+			stmt = conexao.getConnection().createStatement();
+			ResultSet rs = stmt.executeQuery("select id, descricao from categorias order by descricao;");
+			while (rs.next()) {
+				Categoria c = new Categoria();
+				c.setId(rs.getInt("id"));
+				c.setDescricao(rs.getString("descricao"));
+				categorias.add(c);
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return categorias;
+	}
+	
+	
+	
 }
