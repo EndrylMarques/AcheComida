@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Food Finder</title>
-
     <link href="/acheComida/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/acheComida/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="/acheComida//css/app.css" rel="stylesheet">
@@ -17,20 +16,24 @@
 <c:import url="topo.jsp"></c:import>
 <div class="container">
 <div class="page-header">
-<h1> Lista de Categorias </h1>
+<h1> Lista de Produtos </h1>
 </div>
 
 <table class="table" >
 <tr>
 
-<th> Nome </th>
-<th> Excluir Categoria </th>
+<th> Produto </th>
+<th> Categoria </th>
+<th> Valor </th>
+
 </tr>
 
-<c:forEach var="e" items="${lista}">
+<c:forEach var="e" items="${listaOrdemCategoria}">
 <tr>
 
- <td> <a href="/acheComida/categorias?q=editar&id=${e.id}">${e.descricao} </a></td>
+ <td> ${e.descricao} </td>
+ <td> <a href="#">${e.categoria.descricao} </a></td>
+ <td> ${e.valor} </td>
  <td> <a href="/acheComida/categorias?q=excluir&id=${e.id}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a> </td>
  
  

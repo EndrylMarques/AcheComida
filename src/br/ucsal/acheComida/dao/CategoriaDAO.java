@@ -72,4 +72,55 @@ public class CategoriaDAO {
 		conexao.closeConnection();
 	}
 
+	public void excluir(int id) {
+		// TODO Auto-generated method stub
+		PreparedStatement ps;
+		try {
+			ps = conexao.getConnection().prepareStatement("delete from categorias where id=?");
+			ps.setInt(1, id);
+			ps.execute();
+			ps.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void atualizar(Categoria categoria) {
+		// TODO Auto-generated method stub
+		try {
+			PreparedStatement ps = conexao.getConnection()
+					.prepareStatement("update categorias set descricao = ? where id =?;");
+			ps.setString(1, categoria.getDescricao());
+			ps.setInt(2, categoria.getId());
+			ps.execute();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Categoria> organizar() {
+		Statement stmt;
+		List<Categoria> categorias = new ArrayList<>();
+		try {
+			stmt = conexao.getConnection().createStatement();
+			ResultSet rs = stmt.executeQuery("select id, descricao from categorias order by descricao;");
+			while (rs.next()) {
+				Categoria c = new Categoria();
+				c.setId(rs.getInt("id"));
+				c.setDescricao(rs.getString("descricao"));
+				categorias.add(c);
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return categorias;
+	}
+	
+	
+	
 }

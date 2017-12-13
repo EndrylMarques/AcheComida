@@ -7,8 +7,6 @@ public class Produto {
 	private Categoria categoria;
 	private Double valor;
 
-	
-	
 	public Produto() {
 		super();
 	}

@@ -47,15 +47,15 @@ public class ProdutoDAO {
 
 	public void inserir(Produto produto) {
 		try {
-//			System.out.println("inserir");
+			// System.out.println("inserir");
 			PreparedStatement ps = conexao.getConnection()
 					.prepareStatement("insert into produtos (descricao, categoriaid, valor) values (?,?,?);");
 			ps.setString(1, produto.getDescricao());
 			ps.setInt(2, produto.getCategoria().getId());
 			ps.setDouble(3, produto.getValor());
-//			System.out.println("d: "+produto.getDescricao());
-//			System.out.println("c: "+produto.getCategoria().toString());
-//			System.out.println("v: "+produto.getValor());
+			// System.out.println("d: "+produto.getDescricao());
+			// System.out.println("c: "+produto.getCategoria().toString());
+			// System.out.println("v: "+produto.getValor());
 			ps.execute();
 			ps.close();
 		} catch (SQLException e) {
@@ -88,6 +88,49 @@ public class ProdutoDAO {
 			e.printStackTrace();
 		}
 		return produto;
+	}
+
+	public void atualizar(Produto produto) {
+		// TODO Auto-generated method stub
+		try {
+			PreparedStatement ps = conexao.getConnection()
+					.prepareStatement("update produtos set descricao = ?, categoriaid =?, valor=? where id =?;");
+			ps.setString(1, produto.getDescricao());
+			ps.setInt(2, produto.getCategoria().getId());
+			ps.setDouble(3, produto.getValor());
+			ps.setInt(4, produto.getId());
+			ps.execute();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Produto> organizar() {
+
+		Statement stmt;
+		List<Produto> produtos = new ArrayList<>();
+		try {
+			stmt = conexao.getConnection().createStatement();
+			ResultSet rs = stmt.executeQuery("select descricao, valor from produtos order by valor;");
+			while (rs.next()) {
+				Produto p = new Produto();
+				p.setId(rs.getInt("id"));
+				p.setDescricao(rs.getString("descricao"));
+
+				Categoria categoria = new Categoria();
+				categoria.setId(rs.getInt("categoriaid"));
+				p.setCategoria(categoria);
+
+				p.setValor(rs.getDouble("valor"));
+				produtos.add(p);
+			}
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return produtos;
 	}
 
 }

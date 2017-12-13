@@ -27,10 +27,10 @@
 <th> Excluir Categoria </th>
 </tr>
 
-<c:forEach var="e" items="${lista}">
+<c:forEach var="e" items="${listaOrdem}">
 <tr>
 
- <td> <a href="/acheComida/categorias?q=editar&id=${e.id}">${e.descricao} </a></td>
+ <td> <a href="#">${e.descricao} </a></td>
  <td> <a href="/acheComida/categorias?q=excluir&id=${e.id}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a> </td>
  
  
