@@ -17,15 +17,17 @@
 		<div class="page-header">
 			<h1>Inserir Produto</h1>
 		</div>
-		<form action="produtos" method="get">
+		<form action="produtos" method="post">
 			Nome:<input type="text" name="descricao" /><br>
 			Categoria:	
-		<select name="categorias" >
+ 
+		<select id="categoriaid" name="categorias" >
 			<option value="" selected>Selecione</option>
-			<c:forEach var="categorias" items="${lista}">
-				<option value="${categorias.id}">${categorias.descricao}</option>
+			<c:forEach var="c" items="${listaCategoria}">
+				<option value="${c.id}">${c.descricao}</option>
 			</c:forEach>
 		</select> <br />
+
 			Preço: R$<input type="number" name="valor" /><br> <br>
 	
 			<input type="submit" value="Salvar" />

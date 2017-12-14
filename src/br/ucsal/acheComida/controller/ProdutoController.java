@@ -26,15 +26,12 @@ public class ProdutoController extends HttpServlet {
 
 		String q = request.getParameter("q");
 		if (q != null && q.equals("new")) {
-			CategoriaDAO dao = new CategoriaDAO();
-			request.setAttribute("lista", dao.listar());
-
+			CategoriaDAO categoriaDAO = new CategoriaDAO();
+			request.setAttribute("listaCategoria", categoriaDAO.listar());
 			request.getRequestDispatcher("produtoForm.jsp").forward(request, response);
 		} else {
-			ProdutoDAO dao = new ProdutoDAO();
-			// request.setAttribute("lista", dao.listar());
-			// request.getRequestDispatcher("index.jsp").forward(request, response);
-			request.setAttribute("lista", dao.listar());
+			ProdutoDAO produtoDAO = new ProdutoDAO();
+			request.setAttribute("lista", produtoDAO.listar());
 			request.getRequestDispatcher("produtoList.jsp").forward(request, response);
 		}
 	}
@@ -49,7 +46,6 @@ public class ProdutoController extends HttpServlet {
 
 		Produto produto = new Produto();
 		produto.setDescricao(descricao);
-		// form nao tá listando categoria
 
 		CategoriaDAO cDao = new CategoriaDAO();
 		int id = Integer.parseInt(categoriaID);

@@ -17,18 +17,12 @@
 		<div class="page-header">
 			<h1>Inserir Usuario</h1>
 		</div>
-		<form action="produtos" method="get">
-			Nome:<input type="text" name="Nome" /><br>
-			Email:<input type="email" name="Email" /><br>
+		<form action="usuarios" method="post">
+			Nome:<input type="text" name="nome" /><br>
+			Email:<input type="email" name="email" /><br>
 			Senha:<input type="password" name="senha" /><br>
 			Telefone:<input type="text" name="telefone" /><br>
-			Produtos:	
-		<select name="produtos" >
-			<option value="" selected>Selecione</option>
-			<c:forEach var="produtos" items="${lista}">
-				<option value="${produtos.id}">${produtos.nome}</option>
-			</c:forEach>
-		</select> <br />
+			<br />
 			
 			<input type="submit" value="Salvar" />
 		</form>

@@ -8,9 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.ucsal.acheComida.dao.ProdutoDAO;
 import br.ucsal.acheComida.dao.UsuarioDAO;
-import br.ucsal.acheComida.model.Produto;
 import br.ucsal.acheComida.model.Usuario;
 
 @WebServlet("/usuarios")
@@ -32,7 +30,6 @@ public class UsuarioController extends HttpServlet {
 			return;
 		}
 		
-
 		UsuarioDAO dao = new UsuarioDAO();
 
 		if (q != null && q.equals("editar")) {
@@ -62,31 +59,24 @@ public class UsuarioController extends HttpServlet {
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
 		String telefone = request.getParameter("telefone");
-		String produtoID = request.getParameter("produto");
 		
 		Usuario usuario = new Usuario();
 		usuario.setNome(nome);
 		usuario.setEmail(email);
 		usuario.setSenha(senha);
 		usuario.setTelefone(telefone);
-		
-		ProdutoDAO produtoDAO = new ProdutoDAO();
-		int idProduto = Integer.parseInt(produtoID);
-		Produto produto = produtoDAO.getByID(idProduto);
-		
-		usuario.setProduto(produto);
+	
 		
 		UsuarioDAO dao = new UsuarioDAO();
 		dao.inserir(usuario);
 		
-		if(id != null && !id.isEmpty()) {
-			usuario.setId(Integer.parseInt(id));
-			dao.update(usuario);
-		}else {
-			dao.inserir(usuario);
-		}
+//		if(id != null && !id.isEmpty()) {
+//			usuario.setId(Integer.parseInt(id));
+//			dao.update(usuario);
+//		}else {
+//			dao.inserir(usuario);
+//		}
 		
-
 		request.setAttribute("lista", dao.listar());
 		request.getRequestDispatcher("usuarioList.jsp").forward(request, response);
 
