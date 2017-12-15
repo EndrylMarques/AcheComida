@@ -63,7 +63,7 @@ public class UsuarioController extends HttpServlet {
 		String telefone = request.getParameter("telefone");
 
 		Usuario usuario = new Usuario();
-		usuario.setId(Integer.parseInt(id));
+		
 		usuario.setNome(nome);
 		usuario.setEmail(email);
 		usuario.setSenha(senha);
@@ -74,6 +74,7 @@ public class UsuarioController extends HttpServlet {
 		if (id.isEmpty()) {
 			dao.inserir(usuario);
 		} else {
+			usuario.setId(Integer.parseInt(id));
 			dao.update(usuario);
 		}
 
