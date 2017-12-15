@@ -17,12 +17,19 @@
 		<div class="page-header">
 			<h1>Inserir Vendedor</h1>
 		</div>
-		<form action="usuarios" method="post">
+		<form action="vendedores" method="post">
 			Nome:<input type="text" name="nome" /><br>
 			Email:<input type="email" name="email" /><br>
 			Senha:<input type="password" name="senha" /><br>
 			Telefone:<input type="text" name="telefone" /><br>
-			
+			Produtos:	
+ 
+		<select id="produto_id" name="produtos" >
+			<option value="" selected>Selecione</option>
+			<c:forEach var="c" items="${listaProduto}">
+				<option value="${c.id}">${c.descricao}</option>
+			</c:forEach>
+		</select> <br />
 			<br />
 			
 			<input type="submit" value="Salvar" />

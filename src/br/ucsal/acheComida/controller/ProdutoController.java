@@ -1,6 +1,7 @@
 package br.ucsal.acheComida.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,18 +30,37 @@ public class ProdutoController extends HttpServlet {
 			CategoriaDAO categoriaDAO = new CategoriaDAO();
 			request.setAttribute("listaCategoria", categoriaDAO.listar());
 			request.getRequestDispatcher("produtoForm.jsp").forward(request, response);
-		} else {
-			ProdutoDAO produtoDAO = new ProdutoDAO();
-			request.setAttribute("lista", produtoDAO.listar());
+			return;
+		}
+
+		ProdutoDAO dao = new ProdutoDAO();
+
+		if (q != null && q.equals("editar")) {
+			String id = request.getParameter("id");
+			Produto produto = dao.getByID(Integer.parseInt(id));
+			request.setAttribute("produto", produto);
+			request.getRequestDispatcher("produtoForm.jsp").forward(request, response);
+		}
+
+		if (q != null && q.equals("excluir")) {
+			String id = request.getParameter("id");
+			dao.delete(Integer.parseInt(id));
+		}
+
+		// Excessao Abafada
+		if (!response.isCommitted()) {
+			request.setAttribute("lista", dao.listar());
 			request.getRequestDispatcher("produtoList.jsp").forward(request, response);
 		}
+
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		String id = request.getParameter("id");
 		Produto produto = new Produto();
+
 		produto.setDescricao(request.getParameter("descricao"));
 		produto.setValor(Double.parseDouble(request.getParameter("valor")));
 
@@ -49,10 +69,17 @@ public class ProdutoController extends HttpServlet {
 		produto.setCategoria(categoria);
 
 		ProdutoDAO dao = new ProdutoDAO();
-		dao.inserir(produto);
+
+		if (id != null && id.isEmpty()) {
+			produto.setId(Integer.parseInt(id));
+			dao.update(produto);
+		} else {
+
+			dao.inserir(produto);
+		}
 
 		request.setAttribute("lista", dao.listar());
-//		request.getRequestDispatcher("/produtoList.jsp").forward(request, response);
-		response.sendRedirect("produtos");
+		request.getRequestDispatcher("produtoList.jsp").forward(request, response);
+
 	}
 }

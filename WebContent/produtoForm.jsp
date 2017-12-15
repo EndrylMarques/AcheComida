@@ -18,7 +18,8 @@
 			<h1>Inserir Produto</h1>
 		</div>
 		<form action="produtos" method="post">
-			Nome:<input type="text" name="descricao" /><br>
+			
+			Nome:<input type="text" name="descricao" value="${produtos.descricao}"  /><br>
 			Categoria:	
  
 		<select id="categoriaid" name="categorias" >
@@ -28,7 +29,7 @@
 			</c:forEach>
 		</select> <br />
 
-			Preço: R$<input type="text" name="valor" /><br> <br>
+			Preço: R$<input type="text" name="valor"  value="${produtos.valor}"  /><br> <br>
 	
 			<input type="submit" value="Salvar" />
 		</form>

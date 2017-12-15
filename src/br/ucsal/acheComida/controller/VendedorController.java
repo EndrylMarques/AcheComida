@@ -26,8 +26,9 @@ public class VendedorController extends HttpServlet {
 			throws ServletException, IOException {
 
 		String q = request.getParameter("q");
-
 		if (q != null && q.equals("new")) {
+			ProdutoDAO produtoDAO = new ProdutoDAO();
+			request.setAttribute("listaProduto", produtoDAO.listar());
 			request.getRequestDispatcher("vendedorForm.jsp").forward(request, response);
 			return;
 		}
@@ -46,46 +47,52 @@ public class VendedorController extends HttpServlet {
 			dao.delete(Integer.parseInt(id));
 		}
 
-		request.setAttribute("lista", dao.listar());
-		request.getRequestDispatcher("vendedorList.jsp").forward(request, response);
+		// Excessao Abafada
+		if (!response.isCommitted()) {
+			request.setAttribute("lista", dao.listar());
+			request.getRequestDispatcher("vendedorList.jsp").forward(request, response);
+		}
 
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String id = request.getParameter("id");
 		String nome = request.getParameter("nome");
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
 		String telefone = request.getParameter("telefone");
-		String produtoID = request.getParameter("produto");
+		
+		
+		
+        Vendedor vendedor = new Vendedor();
+		
+        vendedor.setNome(nome);
+        vendedor.setEmail(email);
+        vendedor.setSenha(senha);
+        vendedor.setTelefone(telefone);
+        
 
-		Vendedor vendedor = new Vendedor();
-		vendedor.setNome(nome);
-		vendedor.setEmail(email);
-		vendedor.setSenha(senha);
-		vendedor.setTelefone(telefone);
-
-		ProdutoDAO produtoDAO = new ProdutoDAO();
-		int idProduto = Integer.parseInt(produtoID);
-		Produto produto = produtoDAO.getByID(idProduto);
-
+        ProdutoDAO cDao = new ProdutoDAO();
+        Produto produto = cDao.getByID(Integer.parseInt(request.getParameter("produtos")));
 		vendedor.setProduto(produto);
-
+        
 		VendedorDAO dao = new VendedorDAO();
-		dao.inserir(vendedor);
-
-		if (id != null && !id.isEmpty()) {
+		if (id != null && id.isEmpty()) {
 			vendedor.setId(Integer.parseInt(id));
 			dao.update(vendedor);
 		} else {
+			
 			dao.inserir(vendedor);
 		}
 
 		request.setAttribute("lista", dao.listar());
 		request.getRequestDispatcher("vendedorList.jsp").forward(request, response);
-
+//		dao.inserir(produto);
+//
+//		request.setAttribute("lista", dao.listar());
+//		request.getRequestDispatcher("/produtoList.jsp").forward(request, response);
+//		response.sendRedirect("produtos");
 	}
 }

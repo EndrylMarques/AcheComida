@@ -1,12 +1,52 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
+<!DOCTYPE html >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Food Finder</title>
 
+    <link href="/acheComida/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/acheComida/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/acheComida//css/app.css" rel="stylesheet">
+    
+</head>
+
+<body>
+<c:import url="topo.jsp"></c:import>
+<div class="container">
+<div class="page-header">
+<h1> Lista de Usuarios </h1>
+</div>
+
+<table class="table" >
+<tr>
+
+<th> Nome </th>
+<th> Email </th>
+<th> Telefone </th>
+<th> Excluir Usuario </th>
+</tr>
+
+<c:forEach var="e" items="${lista}">
+<tr>
+
+ <td> <a href="/acheComida/vendedores?q=editar&id=${e.id}">${e.nome} </a></td>
+ <td> ${e.email} </td> 
+ <td> ${e.telefone} </td>
+  <td> ${e.produto.valor} </td>
+ <td> <a href="/acheComida/vendedores?q=excluir&id=${e.id}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a> </td>
+ 
+ 
+<tr>
+</c:forEach>
+</table>
+</div>
+
+<c:import url="rodape.jsp"></c:import>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="/acheComida/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

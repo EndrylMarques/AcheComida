@@ -135,4 +135,35 @@ public class ProdutoDAO {
 		return produtos;
 	}
 
+	public void update(Produto produto) {
+		try {
+
+			PreparedStatement ps = conexao.getConnection()
+					.prepareStatement("update produtos set descricao=?,categoria_id = ?, valor = ? where id =?;");
+			ps.setString(1, produto.getDescricao());
+			ps.setInt(2, produto.getCategoria().getId());
+			ps.setDouble(3, produto.getValor());
+			ps.setInt(5, produto.getId());
+			ps.execute();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	
+	public void delete(int id) {
+		PreparedStatement ps;
+		try {
+			ps = conexao.getConnection().prepareStatement("delete from produtos where id=?");
+			ps.setInt(1, id);
+			ps.execute();
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 }
