@@ -28,7 +28,7 @@
 			</c:forEach>
 		</select> <br />
 
-			Preço: R$<input type="number" name="valor" /><br> <br>
+			Preço: R$<input type="text" name="valor" /><br> <br>
 	
 			<input type="submit" value="Salvar" />
 		</form>

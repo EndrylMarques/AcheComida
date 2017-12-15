@@ -18,10 +18,11 @@
 			<h1>Inserir Usuario</h1>
 		</div>
 		<form action="usuarios" method="post">
-			Nome:<input type="text" name="nome" /><br>
-			Email:<input type="email" name="email" /><br>
-			Senha:<input type="password" name="senha" /><br>
-			Telefone:<input type="text" name="telefone" /><br>
+			<input type="hidden" name="id" class=""	value="<c:out value="${usuario.id}" />"/>
+			Nome:<input type="text" name="nome" value="<c:out value="${usuario.nome}" />"/><br>
+			Email:<input type="email" name="email" value="<c:out value="${usuario.email}" />"/><br>
+			Senha:<input type="password" name="senha" value="<c:out value="${usuario.senha}" />"/><br>
+			Telefone:<input type="text" name="telefone" value="<c:out value="${usuario.telefone}" />"/><br>
 			<br />
 			
 			<input type="submit" value="Salvar" />

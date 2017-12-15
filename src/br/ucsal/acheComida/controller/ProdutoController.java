@@ -40,26 +40,19 @@ public class ProdutoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String descricao = request.getParameter("descricao");
-		String categoriaID = request.getParameter("categoriaid");
-		String valor = request.getParameter("valor");
-
 		Produto produto = new Produto();
-		produto.setDescricao(descricao);
+		produto.setDescricao(request.getParameter("descricao"));
+		produto.setValor(Double.parseDouble(request.getParameter("valor")));
 
 		CategoriaDAO cDao = new CategoriaDAO();
-		int id = Integer.parseInt(categoriaID);
-		Categoria categoria = cDao.getByID(id);
+		Categoria categoria = cDao.getByID(Integer.parseInt(request.getParameter("categorias")));
 		produto.setCategoria(categoria);
 
-		Double v = Double.parseDouble(valor);
-		produto.setValor(v);
-
 		ProdutoDAO dao = new ProdutoDAO();
-
 		dao.inserir(produto);
 
 		request.setAttribute("lista", dao.listar());
-		request.getRequestDispatcher("produtoList.jsp").forward(request, response);
+//		request.getRequestDispatcher("/produtoList.jsp").forward(request, response);
+		response.sendRedirect("produtos");
 	}
 }

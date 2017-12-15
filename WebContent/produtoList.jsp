@@ -31,7 +31,7 @@
 <c:forEach var="c" items="${lista}">
 <tr>
  <td> ${c.descricao} </td>
- <td> ${c.categorias.descricao} </td>
+ <td> ${c.categoria.descricao} </td>
  <td> ${c.valor} </td>
   
 <tr>

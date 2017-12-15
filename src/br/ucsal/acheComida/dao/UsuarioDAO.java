@@ -124,12 +124,12 @@ public class UsuarioDAO {
 		try {
 
 			PreparedStatement ps = conexao.getConnection()
-					.prepareStatement("update tipos set nome=?,email = ?, senha = ?, telefone = ?, where id =?;");
+					.prepareStatement("update usuarios set nome=?,email = ?, senha = ?, telefone = ? where id =?;");
 			ps.setString(1, usuario.getNome());
 			ps.setString(2, usuario.getEmail());
-			ps.setString(2, usuario.getSenha());
-			ps.setString(2, usuario.getTelefone());
-			ps.setInt(3, usuario.getId());
+			ps.setString(3, usuario.getSenha());
+			ps.setString(4, usuario.getTelefone());
+			ps.setInt(5, usuario.getId());
 			ps.execute();
 			ps.close();
 		} catch (SQLException e) {

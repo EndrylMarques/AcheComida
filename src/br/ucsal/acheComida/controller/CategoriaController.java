@@ -43,8 +43,9 @@ public class CategoriaController extends HttpServlet {
 			dao.excluir(Integer.parseInt(id));
 		}
 
-//		request.setAttribute("lista", dao.listar());
-//		request.getRequestDispatcher("categoriaList.jsp").forward(request, response);
+		// request.setAttribute("lista", dao.listar());
+		// request.getRequestDispatcher("categoriaList.jsp").forward(request,
+		// response);
 		request.setAttribute("listaOrdem", dao.organizar());
 		request.getRequestDispatcher("categoriaOrdem.jsp").forward(request, response);
 	}
@@ -58,7 +59,7 @@ public class CategoriaController extends HttpServlet {
 
 		Categoria categoria = new Categoria(descricao);
 		CategoriaDAO dao = new CategoriaDAO();
-		
+
 		if (id != null && !id.isEmpty()) {
 			categoria.setId(Integer.parseInt(id));
 			dao.atualizar(categoria);
@@ -68,6 +69,6 @@ public class CategoriaController extends HttpServlet {
 
 		request.setAttribute("listaOrdem", dao.organizar());
 		request.getRequestDispatcher("categoriaOrdem.jsp").forward(request, response);
-	
+
 	}
 }

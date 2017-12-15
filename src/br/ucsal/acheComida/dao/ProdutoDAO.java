@@ -20,18 +20,20 @@ public class ProdutoDAO {
 	}
 
 	public List<Produto> listar() {
+		CategoriaDAO daoCategoria = new CategoriaDAO();
 		Statement stmt;
 		List<Produto> produtos = new ArrayList<>();
 		try {
 			stmt = conexao.getConnection().createStatement();
-			ResultSet rs = stmt.executeQuery("select id, descricao, categoriaid, valor from produtos;");
+			ResultSet rs = stmt.executeQuery("select id, descricao, categoria_id, valor from produtos;");
 			while (rs.next()) {
 				Produto p = new Produto();
+				int categoriaId = Integer.valueOf(rs.getString("categoria_id"));
 				p.setId(rs.getInt("id"));
 				p.setDescricao(rs.getString("descricao"));
 
 				Categoria categoria = new Categoria();
-				categoria.setId(rs.getInt("categoriaid"));
+				categoria = daoCategoria.getByID(categoriaId);
 				p.setCategoria(categoria);
 
 				p.setValor(rs.getDouble("valor"));
@@ -49,7 +51,7 @@ public class ProdutoDAO {
 		try {
 			// System.out.println("inserir");
 			PreparedStatement ps = conexao.getConnection()
-					.prepareStatement("insert into produtos (descricao, categoriaid, valor) values (?,?,?);");
+					.prepareStatement("insert into produtos (descricao, categoria_id, valor) values (?,?,?);");
 			ps.setString(1, produto.getDescricao());
 			ps.setInt(2, produto.getCategoria().getId());
 			ps.setDouble(3, produto.getValor());
@@ -68,7 +70,7 @@ public class ProdutoDAO {
 		Produto produto = null;
 		try {
 			PreparedStatement ps = conexao.getConnection()
-					.prepareStatement("select id, descricao, categoriaid, valor from produtos where id=?");
+					.prepareStatement("select id, descricao, categoria_id, valor from produtos where id=?");
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -77,7 +79,7 @@ public class ProdutoDAO {
 				produto.setDescricao(rs.getString("descricao"));
 
 				Categoria categoria = new Categoria();
-				categoria.setId(rs.getInt("categoriaid"));
+				categoria.setId(rs.getInt("categoria_id"));
 
 				produto.setCategoria(categoria);
 				produto.setValor(rs.getDouble("valor"));
@@ -94,7 +96,7 @@ public class ProdutoDAO {
 		// TODO Auto-generated method stub
 		try {
 			PreparedStatement ps = conexao.getConnection()
-					.prepareStatement("update produtos set descricao = ?, categoriaid =?, valor=? where id =?;");
+					.prepareStatement("update produtos set descricao = ?, categoria_id =?, valor=? where id =?;");
 			ps.setString(1, produto.getDescricao());
 			ps.setInt(2, produto.getCategoria().getId());
 			ps.setDouble(3, produto.getValor());
@@ -119,7 +121,7 @@ public class ProdutoDAO {
 				p.setDescricao(rs.getString("descricao"));
 
 				Categoria categoria = new Categoria();
-				categoria.setId(rs.getInt("categoriaid"));
+				categoria.setId(rs.getInt("categoria_id"));
 				p.setCategoria(categoria);
 
 				p.setValor(rs.getDouble("valor"));
