@@ -63,36 +63,29 @@ public class VendedorController extends HttpServlet {
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
 		String telefone = request.getParameter("telefone");
-		
-		
-		
-        Vendedor vendedor = new Vendedor();
-		
-        vendedor.setNome(nome);
-        vendedor.setEmail(email);
-        vendedor.setSenha(senha);
-        vendedor.setTelefone(telefone);
-        
 
-        ProdutoDAO cDao = new ProdutoDAO();
-        Produto produto = cDao.getByID(Integer.parseInt(request.getParameter("produtos")));
+		Vendedor vendedor = new Vendedor();
+
+		vendedor.setNome(nome);
+		vendedor.setEmail(email);
+		vendedor.setSenha(senha);
+		vendedor.setTelefone(telefone);
+
+		ProdutoDAO cDao = new ProdutoDAO();
+		Produto produto = cDao.getByID(Integer.parseInt(request.getParameter("produtos")));
 		vendedor.setProduto(produto);
-        
+
 		VendedorDAO dao = new VendedorDAO();
-		if (id != null && id.isEmpty()) {
+		if (id.isEmpty()) {
+			dao.inserir(vendedor);
+		} else {
 			vendedor.setId(Integer.parseInt(id));
 			dao.update(vendedor);
-		} else {
-			
-			dao.inserir(vendedor);
+
 		}
 
 		request.setAttribute("lista", dao.listar());
 		request.getRequestDispatcher("vendedorList.jsp").forward(request, response);
-//		dao.inserir(produto);
-//
-//		request.setAttribute("lista", dao.listar());
-//		request.getRequestDispatcher("/produtoList.jsp").forward(request, response);
-//		response.sendRedirect("produtos");
+
 	}
 }

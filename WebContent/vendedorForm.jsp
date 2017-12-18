@@ -18,18 +18,22 @@
 			<h1>Inserir Vendedor</h1>
 		</div>
 		<form action="vendedores" method="post">
-			Nome:<input type="text" name="nome" /><br>
-			Email:<input type="email" name="email" /><br>
-			Senha:<input type="password" name="senha" /><br>
-			Telefone:<input type="text" name="telefone" /><br>
+		    <input type="hidden" name="id" class=""	value="<c:out value="${vendedor.id}" />"/>
+		    Nome:<input type="text" name="nome" value="<c:out value="${vendedor.nome}" />"/><br>
+			Email:<input type="email" name="email" value="<c:out value="${vendedor.email}" />" /><br>
+			Senha:<input type="password" name="senha" value="<c:out value="${vendedor.senha}" />"/><br>
+			Telefone:<input type="text" name="telefone" value="<c:out value="${vendedor.telefone}" />"/><br>
 			Produtos:	
- 
-		<select id="produto_id" name="produtos" >
-			<option value="" selected>Selecione</option>
-			<c:forEach var="c" items="${listaProduto}">
-				<option value="${c.id}">${c.descricao}</option>
+ 	
+ 			<select  name="produtos" >
+			<option value="${vendedor.produto.id}"><c:out value="${vendedor.produto}" /></option>
+			<c:forEach var="c" items="${listaProduto}">	
+					
+				<option value="<c:out value="${c.id}" />"><c:out value="${c.descricao}" /></option>
 			</c:forEach>
 		</select> <br />
+ 
+		
 			<br />
 			
 			<input type="submit" value="Salvar" />

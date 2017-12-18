@@ -54,7 +54,7 @@ public class VendedorDAO {
 		try {
 			stmt = conexao.getConnection().createStatement();
 			ResultSet rs = stmt.executeQuery(
-					"select usuario.id,nome,email,senha,telefone,produto_id, produtos.nome as nomeproduto from vendedores,produtos where usuarios.produto_id = produtos.id;");
+					"select vendedores.id,nome,email,senha,telefone,produto_id, produtos.descricao from vendedores inner join produtos on vendedores.produto_id = produtos.id;");
 			while (rs.next()) {
 				Vendedor v = new Vendedor();
 				v.setId(rs.getInt("id"));

@@ -29,7 +29,7 @@ public class CategoriaController extends HttpServlet {
 		String q = request.getParameter("q");
 
 		if (q != null && q.equals("new")) {
-			request.getRequestDispatcher("usuarioForm.jsp").forward(request, response);
+			request.getRequestDispatcher("categoriaForm.jsp").forward(request, response);
 			return;
 		}
 
