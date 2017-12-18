@@ -21,12 +21,13 @@
 			<input type="hidden" name="id" class=""	value="<c:out value="${produto.id}" />"/>
 			Nome:<input type="text" name="descricao" value="<c:out value="${produto.descricao}" />"/><br>
 			Categoria:	
- 
+ 		
 		<select  name="categorias" >
-			<option value="${produto.categoria.id}"><c:out value="${produto.categoria}" /></option>
+		<option value="<c:out value="${catProd.id}" />"><c:out value="${catProd.descricao}" /></option>
 			<c:forEach var="c" items="${listaCategoria}">	
-					
+					<c:if test="${catProd.id != c.id}">
 				<option value="<c:out value="${c.id}" />"><c:out value="${c.descricao}" /></option>
+				</c:if>
 			</c:forEach>
 		</select> <br />
 

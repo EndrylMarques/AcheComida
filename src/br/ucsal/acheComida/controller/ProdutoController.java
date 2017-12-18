@@ -39,6 +39,7 @@ public class ProdutoController extends HttpServlet {
 			Produto produto = dao.getByID(Integer.parseInt(id));
 			request.setAttribute("listaCategoria", categoriaDAO.listar());
 			request.setAttribute("produto", produto);
+			request.setAttribute("catProd", categoriaDAO.getByID(produto.getCategoria().getId()));
 			request.getRequestDispatcher("produtoForm.jsp").forward(request, response);
 		}
 
