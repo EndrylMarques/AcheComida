@@ -24,10 +24,9 @@ public class ProdutoController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		CategoriaDAO categoriaDAO = new CategoriaDAO();
 		String q = request.getParameter("q");
 		if (q != null && q.equals("new")) {
-			CategoriaDAO categoriaDAO = new CategoriaDAO();
 			request.setAttribute("listaCategoria", categoriaDAO.listar());
 			request.getRequestDispatcher("produtoForm.jsp").forward(request, response);
 			return;
@@ -38,6 +37,7 @@ public class ProdutoController extends HttpServlet {
 		if (q != null && q.equals("editar")) {
 			String id = request.getParameter("id");
 			Produto produto = dao.getByID(Integer.parseInt(id));
+			request.setAttribute("listaCategoria", categoriaDAO.listar());
 			request.setAttribute("produto", produto);
 			request.getRequestDispatcher("produtoForm.jsp").forward(request, response);
 		}
@@ -65,17 +65,17 @@ public class ProdutoController extends HttpServlet {
 		produto.setValor(Double.parseDouble(request.getParameter("valor")));
 
 		CategoriaDAO cDao = new CategoriaDAO();
-		Categoria categoria = cDao.getByID(Integer.parseInt(request.getParameter("categorias")));
+		int c = Integer.parseInt(request.getParameter("categorias"));
+		Categoria categoria = cDao.getByID(c);
 		produto.setCategoria(categoria);
 
 		ProdutoDAO dao = new ProdutoDAO();
 
-		if (id != null && id.isEmpty()) {
+		if (id.isEmpty()) {
+			dao.inserir(produto);
+		} else {
 			produto.setId(Integer.parseInt(id));
 			dao.update(produto);
-		} else {
-
-			dao.inserir(produto);
 		}
 
 		request.setAttribute("lista", dao.listar());

@@ -18,19 +18,20 @@
 			<h1>Inserir Produto</h1>
 		</div>
 		<form action="produtos" method="post">
-			
-			Nome:<input type="text" name="descricao" value="${produtos.descricao}"  /><br>
+			<input type="hidden" name="id" class=""	value="<c:out value="${produto.id}" />"/>
+			Nome:<input type="text" name="descricao" value="<c:out value="${produto.descricao}" />"/><br>
 			Categoria:	
  
-		<select id="categoriaid" name="categorias" >
-			<option value="" selected>Selecione</option>
-			<c:forEach var="c" items="${listaCategoria}">
-				<option value="${c.id}">${c.descricao}</option>
+		<select  name="categorias" >
+			<option value="${produto.categoria.id}"><c:out value="${produto.categoria}" /></option>
+			<c:forEach var="c" items="${listaCategoria}">	
+					
+				<option value="<c:out value="${c.id}" />"><c:out value="${c.descricao}" /></option>
 			</c:forEach>
 		</select> <br />
 
-			Preço: R$<input type="text" name="valor"  value="${produtos.valor}"  /><br> <br>
-	
+			
+			Preço: R$<input type="text" name="valor" value="<c:out value="${produto.valor}" />"/><br>
 			<input type="submit" value="Salvar" />
 		</form>
 	</div>

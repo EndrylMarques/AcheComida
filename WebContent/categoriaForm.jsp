@@ -18,7 +18,8 @@
 			<h1>Inserir Categoria</h1>
 		</div>
 		<form action="categorias" method="post">
-			Nome:<input type="text" name="descricao" /><br> <br>
+			<input type="hidden" name="id" class=""	value="<c:out value="${categoria.id}" />"/>
+			Nome:<input type="text" name="descricao" value="<c:out value="${categoria.descricao}" />"/><br> <br>
 			<input type="submit" value="Salvar" />
 		</form>
 	</div>

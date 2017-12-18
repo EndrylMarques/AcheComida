@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ucsal.acheComida.dao.CategoriaDAO;
+import br.ucsal.acheComida.dao.UsuarioDAO;
 import br.ucsal.acheComida.model.Categoria;
+import br.ucsal.acheComida.model.Usuario;
 
 @WebServlet("/categorias")
 public class CategoriaController extends HttpServlet {
@@ -23,9 +25,11 @@ public class CategoriaController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+
 		String q = request.getParameter("q");
+
 		if (q != null && q.equals("new")) {
-			request.getRequestDispatcher("categoriaForm.jsp").forward(request, response);
+			request.getRequestDispatcher("usuarioForm.jsp").forward(request, response);
 			return;
 		}
 
@@ -43,11 +47,14 @@ public class CategoriaController extends HttpServlet {
 			dao.excluir(Integer.parseInt(id));
 		}
 
-		// request.setAttribute("lista", dao.listar());
-		// request.getRequestDispatcher("categoriaList.jsp").forward(request,
-		// response);
-		request.setAttribute("listaOrdem", dao.organizar());
-		request.getRequestDispatcher("categoriaOrdem.jsp").forward(request, response);
+		// Excessao Abafada
+		if (!response.isCommitted()) {
+			request.setAttribute("lista", dao.listar());
+			request.getRequestDispatcher("categoriaList.jsp").forward(request, response);
+		
+		}
+	
+	
 	}
 
 	@Override
@@ -60,11 +67,12 @@ public class CategoriaController extends HttpServlet {
 		Categoria categoria = new Categoria(descricao);
 		CategoriaDAO dao = new CategoriaDAO();
 
-		if (id != null && !id.isEmpty()) {
+		if (id.isEmpty()) {
+			dao.inserir(categoria);
+		} else {
 			categoria.setId(Integer.parseInt(id));
 			dao.atualizar(categoria);
-		} else {
-			dao.inserir(categoria);
+			
 		}
 
 		request.setAttribute("listaOrdem", dao.organizar());

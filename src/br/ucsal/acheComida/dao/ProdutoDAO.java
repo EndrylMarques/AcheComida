@@ -143,7 +143,7 @@ public class ProdutoDAO {
 			ps.setString(1, produto.getDescricao());
 			ps.setInt(2, produto.getCategoria().getId());
 			ps.setDouble(3, produto.getValor());
-			ps.setInt(5, produto.getId());
+			ps.setInt(4, produto.getId());
 			ps.execute();
 			ps.close();
 		} catch (SQLException e) {
