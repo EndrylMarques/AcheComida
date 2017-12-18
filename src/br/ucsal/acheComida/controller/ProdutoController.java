@@ -1,6 +1,7 @@
 package br.ucsal.acheComida.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,9 +38,16 @@ public class ProdutoController extends HttpServlet {
 		if (q != null && q.equals("editar")) {
 			String id = request.getParameter("id");
 			Produto produto = dao.getByID(Integer.parseInt(id));
-			request.setAttribute("listaCategoria", categoriaDAO.listar());
+			List<Categoria> listaCategoria = categoriaDAO.listar();
+			Categoria categoriaProduto = new Categoria();
+			for (Categoria categoria : listaCategoria) {
+				if (categoria.getId() == produto.getCategoria().getId()) {
+					categoriaProduto = categoria;
+				}
+			}
+			request.setAttribute("listaCategoria", listaCategoria);
 			request.setAttribute("produto", produto);
-			request.setAttribute("catProd", categoriaDAO.getByID(produto.getCategoria().getId()));
+			request.setAttribute("catProd", categoriaProduto);
 			request.getRequestDispatcher("produtoForm.jsp").forward(request, response);
 		}
 
