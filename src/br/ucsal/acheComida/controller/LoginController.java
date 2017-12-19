@@ -33,9 +33,9 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String usuario = request.getParameter("usuario");
+		String usuario = request.getParameter("email");
 		String senha = request.getParameter("senha");
-		String md5 = MD5Encoder.encode(senha.getBytes());
+	
 	
 		
 		if(usuario.equalsIgnoreCase(senha)) {
