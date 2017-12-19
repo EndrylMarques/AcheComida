@@ -65,15 +65,16 @@ public class VendedorDAO {
 
 				Produto produto = new Produto();
 				produto.setId(rs.getInt("produto_id"));
-				produto.setDescricao(rs.getString("descricao_produto"));
-
-				Categoria categoria = new Categoria();
-				categoria.setId(rs.getInt("categoria_id"));
-				categoria.setDescricao(rs.getString("descricao_categoria"));
-
-				produto.setCategoria(categoria);
-				produto.setValor(rs.getDouble("valor"));
+				produto.setDescricao(rs.getString("descricao"));
 				v.setProduto(produto);
+
+//				Categoria categoria = new Categoria();
+//				categoria.setId(rs.getInt("categoria_id"));
+//				categoria.setDescricao(rs.getString("descricao_categoria"));
+//
+//				produto.setCategoria(categoria);
+//				produto.setValor(rs.getDouble("valor"));
+//				v.setProduto(produto);
 
 				vendedores.add(v);
 			}

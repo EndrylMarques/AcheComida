@@ -17,15 +17,14 @@
 <c:import url="topo.jsp"></c:import>
 <div class="container">
 <div class="page-header">
-<h1> Lista de Usuarios </h1>
+<h1> Vendedores </h1>
 </div>
 
 <table class="table" >
 <tr>
 
 <th> Nome </th>
-<th> Email </th>
-<th> Telefone </th>
+<th> Produto </th>
 <th> Excluir Usuario </th>
 </tr>
 
@@ -33,9 +32,7 @@
 <tr>
 
  <td> <a href="/acheComida/vendedores?q=editar&id=${e.id}">${e.nome} </a></td>
- <td> ${e.email} </td> 
- <td> ${e.telefone} </td>
-  <td> ${e.produto.valor} </td>
+ <td> ${e.produto.descricao} </td>
  <td> <a href="/acheComida/vendedores?q=excluir&id=${e.id}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a> </td>
  
  
