@@ -7,7 +7,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Login</title>
+<title>Food Finder</title>
 
 <link href="/acheComida/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -17,26 +17,36 @@
 
 </head>
 <body>
+<c:import url="topo2.jsp"></c:import>
+
+	<table class="table" >
+<tr>
+
+<th> Nome </th>
+<th> Produto </th>
+<th> Valor </th>
+
+</tr>
+
+<c:forEach var="e" items="${listaVendedor}">
+<tr>
+
+ <td> >${e.nome} </td>
+ <td> ${e.produto.descricao} </td>
+ <td> ${e.produto.valor} </td>
+ 
+ 
+<tr>
+</c:forEach>
+</table>
 
 
-<div class="container">
-		<form class="form-signin" action="LoginController" method="post">
-			<h3 class="form-signin-heading">Login</h3>
-			<label for="inputEmail" class="sr-only">Email</label> <input
-				type="email" name="inputEmail" class="form-control"
-				placeholder="Email" required autofocus> <label
-				for="inputPassword" class="sr-only">Senha</label> <input
-				type="password" name="inputPassword" class="form-control"
-				placeholder="Senha" required>
-			<button class="btn btn-primary btn-block" type="submit">Entrar</button>
-			
-		</form>
-	</div>
 	
+
+<c:import url="rodape.jsp"></c:import>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 	<script src="/acheComida/bootstrap/js/bootstrap.min.js"></script>
-</body>
 </body>
 </html>
