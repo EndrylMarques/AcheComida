@@ -19,8 +19,9 @@
 <body>
 <c:import url="topo.jsp"></c:import>
 
+
 	<h1>Home</h1>
-	<table class="table" >
+	<table class="table"  >
 <tr>
 
 <th> Nome </th>

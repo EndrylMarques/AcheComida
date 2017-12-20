@@ -20,7 +20,7 @@ public class HomeController extends HttpServlet {
 			throws ServletException, IOException {
 
 		VendedorDAO vendedorDao = new VendedorDAO();
-		// Excessao Abafada
+		
 		if (!response.isCommitted()) {
 			request.setAttribute("lista", vendedorDao.listar());
 			request.getRequestDispatcher("index.jsp").forward(request, response);
