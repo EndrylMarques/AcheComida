@@ -17,13 +17,11 @@
 
 </head>
 <body>
+<c:import url="topo.jsp"></c:import>
 
-
+	<h1>Home</h1>
 	
- <c:import url="vendedores"></c:import>
-
-	
-
+<c:import url="rodape.jsp"></c:import>
 <script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
