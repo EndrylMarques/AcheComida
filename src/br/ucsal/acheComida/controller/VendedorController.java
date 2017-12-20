@@ -85,7 +85,7 @@ public class VendedorController extends HttpServlet {
 		}
 
 		request.setAttribute("lista", dao.listar());
-		request.getRequestDispatcher("vendedorList.jsp").forward(request, response);
+		request.getRequestDispatcher("home.jsp").forward(request, response);
 
 	}
 }
