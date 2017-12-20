@@ -20,7 +20,29 @@
 <c:import url="topo.jsp"></c:import>
 
 	<h1>Home</h1>
-	
+	<table class="table" >
+<tr>
+
+<th> Nome </th>
+<th> Produto </th>
+<th> Valor </th>
+<th> Telefone </th>
+<th> Excluir Usuario </th>
+</tr>
+
+<c:forEach var="e" items="${lista}">
+<tr>
+
+ <td> <a href="/acheComida/vendedores?q=editar&id=${e.id}">${e.nome} </a></td>
+ <td> ${e.produto.descricao} </td>
+ <td> ${e.produto.valor} </td>
+ <td> ${e.telefone} </td>
+ <td> <a href="/acheComida/vendedores?q=excluir&id=${e.id}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a> </td>
+ 
+ 
+<tr>
+</c:forEach>
+</table>
 <c:import url="rodape.jsp"></c:import>
 <script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
