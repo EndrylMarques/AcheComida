@@ -28,6 +28,7 @@
 				<th>Nome</th>
 				<th>Categoria</th>
 				<th>Preço</th>
+				<th>Excluir Produto</th>
 			</tr>
 
 			<c:forEach var="c" items="${lista}">
